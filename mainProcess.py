@@ -9,8 +9,11 @@ def sendLine(message):
     data = { 'message': message }
 
     # 以 requests 發送 POST 請求
-    requests.post("https://notify-api.line.me/api/notify",
+    r = requests.post("https://notify-api.line.me/api/notify",
     headers = headers, data = data)
+
+    # check request status
+    return r.status_code
 
 class medicine:
     def __init__(self, msgType):
@@ -29,6 +32,10 @@ class medicine:
         self.msg = "用藥異常！" + str(self.get_msgType())
         print(self.msg)
         sendLine(self.msg)
+        if(sendLine(self.msg) == 200):
+            print(str(self) + " 傳送成功！")
+        else:
+            print(str(self) + "傳送出錯！")
 
 class heart:
     def __init__(self, msgType):
@@ -59,8 +66,10 @@ class heart:
 # LINE Notify 權杖
 token = pwinput.pwinput(prompt='輸入權杖：', mask='*')
 
-print("連結成功！")
-# sendLine("連結成功！")
+if(sendLine("連結成功！") == 200):
+    print("連結成功！")
+else:
+    print("連結失敗！")
 
 # medicineNotify = ["沒吃藥", "吃藥丸A"]
 
