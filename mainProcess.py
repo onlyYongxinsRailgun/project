@@ -1,3 +1,7 @@
+# Branch test
+# 409411427-Branch
+
+
 import requests
 # pip install pwinput
 import pwinput
@@ -31,7 +35,7 @@ class medicine:
     def warning(self):
         self.msg = "用藥異常！" + str(self.get_msgType())
         print(self.msg)
-        sendLine(self.msg)
+        # sendLine(self.msg)
         if(sendLine(self.msg) == 200):
             print(str(self) + " 傳送成功！")
         else:
